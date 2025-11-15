@@ -2,7 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-
+setcookie("remember_me", "", time() - 3600, "/", "", true, true);
 header("location: login.php");
 exit();
 ?>

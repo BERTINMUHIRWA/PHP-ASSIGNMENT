@@ -11,11 +11,35 @@ if (isset($_POST['login'])) {
   $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) > 0) {
+
+     if(isset($_POST['remember'])) {
+            $token = bin2hex(random_bytes(16));
+            $stmt = $conn->prepare("UPDATE users SET username = ? WHERE Username = ?");
+            $stmt->bind_param("ss", $token, $username);
+            $stmt->execute();
+            setcookie("remember_me", $token, time() + (30*24*60*60), "/", "", true, true);
+        }
+
     $_SESSION['username'] = $username;
     echo "<script>window.location.href='select.php';</script>";
   } else {
     $error = "Invalid username or password!";
   }
+}
+if(!isset($_SESSION['username']) && isset($_COOKIE['remember_me'])) {
+    $token = $_COOKIE['remember_me'];
+    $stmt = $conn->prepare("SELECT Username FROM users WHERE username = ?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows === 1){
+        $row = $result->fetch_assoc();
+        $_SESSION['username'] = $row['Username'];
+        echo "<script>window.location.href='select.php';</script>";
+    } else {
+        setcookie("remember_me", "", time() - 3600, "/", "", true, true);
+    }
 }
 ?>
 
@@ -138,6 +162,7 @@ if (isset($_POST['login'])) {
 
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
+      <input type="checkbox" name="remember" value="1"> Remember Me
 
       <button type="submit" name="login">Login</button>
 

@@ -7,7 +7,7 @@ if(!isset($_SESSION['username'])){
 
 include('connection.php');
 
-$sql = "SELECT * FROM form";
+$sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 ?>
 
@@ -130,17 +130,22 @@ $result = $conn->query($sql);
       background:#f8fafc;
     }
 
+
   </style>
 </head>
 <body>
-
+<div class="sidebar">
+      
 <div class="container">
   <header>
-    <h1>WELCOME TO CLIENT MANAGEMENT SYSTEM</h1>
+    <nav>
+        <a href="select.php">🏠</a>
+      </nav>
+    <h1>USER PORTAL</h1>
     <form method="POST">
       <div class="action-buttons">
-        <button type="submit" name="view">View Users</button>
-        <button type="submit" name="new">New Client</button>
+        <!-- <button type="submit" name="view">View Users</button> -->
+        <button type="submit" name="new">New User</button>
         <button id="logoutBtn"><a href="logout.php">Logout</a></button>
       </div>
     </form>
@@ -148,27 +153,24 @@ $result = $conn->query($sql);
 
   <table>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Phone</th>
-      <th>Gender</th>
+      <th>Identity</th>
+      <th>Username</th>
+      <th>Password</th>
       <th>Actions</th>
     </tr>
     <?php
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {
-        $fname = $row['Firstname'];
-        $lname = $row['Lastname'];
-        $phone = $row['Phone'];
-        $gender = $row['Gender'];
+        $id = $row['Identity'];
+        $uname = $row['Username'];
+        $pass = $row['Password'];
         echo "<tr>
-                <td>$fname</td>
-                <td>$lname</td>
-                <td>$phone</td>
-                <td>$gender</td>
+                <td>$id</td>
+                <td>$uname</td>
+                <td>$pass</td>
                 <td>
-                  <a class='btn-update' href='update.php?updatenbr=$phone'>Update</a>
-                  <a class='btn-delete' href='delete.php?deletenbr=$phone'>Delete</a>
+                  <a class='btn-update' href='updateuser.php?updatenbr=$id'>Update</a>
+                  <a class='btn-delete' href='deleteuser.php?deletenbr=$id'>Delete</a>
                 </td>
               </tr>";
       }
@@ -177,17 +179,12 @@ $result = $conn->query($sql);
     }
     $conn->close();
     ?>
-    <?php 
-    if(isset($_POST['view'])){
-      echo "<script>window.location.href='selectuser.php';</script>";
-    }
-    ?>
+
     <?php 
     if(isset($_POST['new'])){
-      echo "<script>window.location.href='index.php';</script>";
+      echo "<script>window.location.href='register.php';</script>";
     }
     ?>
-
   </table>
 
   <footer>
