@@ -8,7 +8,7 @@ if(isset($_GET['deletenbr'])){
     if($query == true){
         echo "<script>window.location.href='selectuser.php';</script>";
     }else{
-       echo "no data is supposed to be deleted";
+       echo "You are not allowed to delete this user!";
     }
 }
 ?>
