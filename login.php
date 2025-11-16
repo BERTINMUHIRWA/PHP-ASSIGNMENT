@@ -12,13 +12,9 @@ if (isset($_POST['login'])) {
 
   if (mysqli_num_rows($result) > 0) {
 
-     if(isset($_POST['remember'])) {
-            $token = bin2hex(random_bytes(16));
-            $stmt = $conn->prepare("UPDATE users SET username = ? WHERE Username = ?");
-            $stmt->bind_param("ss", $token, $username);
-            $stmt->execute();
-            setcookie("remember_me", $token, time() + (30*24*60*60), "/", "", true, true);
-        }
+    if(isset($_POST['remember'])) {
+        setcookie("remember_me", $username, time() + (86400 * 30), "/", "", true, true);
+    }
 
     $_SESSION['username'] = $username;
     echo "<script>window.location.href='select.php';</script>";
