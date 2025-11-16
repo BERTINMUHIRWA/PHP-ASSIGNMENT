@@ -5,7 +5,7 @@ session_start();
 if(isset($_POST['register'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
 
 
         $check = mysqli_query($conn, "SELECT * FROM users WHERE Username='$username'");

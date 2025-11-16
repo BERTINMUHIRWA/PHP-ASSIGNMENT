@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2025 at 06:07 PM
+-- Generation Time: Nov 16, 2025 at 03:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ INSERT INTO `form` (`Firstname`, `Lastname`, `Phone`, `Gender`) VALUES
 ('KABBY', 'Denny', '0725587295', 'Male'),
 ('MUHIRE', 'Kelvin', '0784252525', 'Male'),
 ('KABBY', 'Flavia', '07865624651', 'Male'),
-('KALISA', 'Eric', '079767762', 'Male');
+('KALISA', 'MUSA', '079767762', 'Male');
 
 -- --------------------------------------------------------
 
@@ -61,8 +61,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Identity`, `Username`, `Password`) VALUES
-(2, 'kenny', '1234'),
-(3, 'f245eff807089d0da7a0', '202cb962ac59075b964b');
+(100, 'Kigali', '202cb962ac59075b964b'),
+(102, 'Bertin', '2929'),
+(108, 'Bertinmuhirwa', '123');
 
 --
 -- Indexes for dumped tables
@@ -88,7 +89,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Identity` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `Identity` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
